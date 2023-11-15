@@ -27,7 +27,7 @@ export default function FirstCityPage() {
   const [isYouTurn, setisYouTurn] = useState(true);
   const [isFirstSubmit, setIsFirstSubmit] = useState(true);
   const [countdownOver, setCountdownOver] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<null | HTMLLIElement>(null);
 
   const [error, setError] = useState("");
 
