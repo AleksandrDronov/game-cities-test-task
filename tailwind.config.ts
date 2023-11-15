@@ -8,10 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      keyframes: {
+        wiggle: {
+          "0%": {
+            width: "100%",
+          },
+          "100%": {
+            width: "0%",
+          },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 120s linear",
       },
     },
   },
