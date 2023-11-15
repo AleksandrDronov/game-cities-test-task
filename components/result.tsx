@@ -38,12 +38,12 @@ function ResultPage({ citiesCount, city, status }: ResultPageProps) {
         <p>Последний город названный победителем</p>
         <p className="text-2xl pt-4">{city}</p>
       </div>
-      <Link
+      <a
         href="/"
         className="bg-violet-600 text-white text-base py-2 px-4 rounded hover:opacity-75 transition-all"
       >
         Начать новую игру
-      </Link>
+      </a>
     </div>
   );
 }

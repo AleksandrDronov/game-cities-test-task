@@ -3,7 +3,7 @@
 import ResultPage from "@/components/result";
 import getCity, { data } from "@/libs/get-city";
 import reduceValue from "@/libs/reduce-value";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Countdown from "react-countdown";
 
 const renderer = ({
@@ -27,6 +27,7 @@ export default function FirstCityPage() {
   const [isYouTurn, setisYouTurn] = useState(true);
   const [isFirstSubmit, setIsFirstSubmit] = useState(true);
   const [countdownOver, setCountdownOver] = useState(false);
+  const ref = useRef(null);
 
   const [error, setError] = useState("");
 
@@ -36,6 +37,10 @@ export default function FirstCityPage() {
   if (["ь", "ъ", "ы"].includes(LastChar)) {
     LastChar = lastCity?.[lastCity?.length - 2];
   }
+
+  useEffect(() => {
+    ref?.current?.scrollIntoView({ behavior: "smooth" });
+  });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -80,7 +85,7 @@ export default function FirstCityPage() {
   };
 
   const game = (
-    <div className="flex flex-col justify-between w-[576px] max-h-[464px] h-[80vh] bg-white rounded-2xl">
+    <div className="flex flex-col justify-between w-[576px] max-h-[549px] h-[80vh] min-h-[300px] bg-white rounded-2xl">
       <div>
         <div className="flex justify-between pt-[19px] pb-[12px] px-4">
           {isYouTurn ? (
@@ -108,16 +113,27 @@ export default function FirstCityPage() {
         </p>
       ) : (
         <>
-          <ul className="p-4 flex flex-col items-start gap-y-2 overflow-y-auto h-full">
-            {cities?.map((city) => (
-              <li
-                key={city}
-                className="odd:text-white even:bg-violet-50 odd:bg-violet-500 
+          <ul className="p-4 flex flex-col items-start gap-y-2 overflow-y-hidden h-full">
+            {cities?.map((city, index, arr) =>
+              index === arr.length - 1 ? (
+                <li
+                  key={city}
+                  ref={ref}
+                  className="odd:text-white even:bg-violet-50 odd:bg-violet-500 
                  even:text-gray-700 px-3 py-2 rounded-xl even:mr-auto odd:ml-auto even:rounded-bl-none odd:rounded-br-none"
-              >
-                {city}
-              </li>
-            ))}
+                >
+                  {city}
+                </li>
+              ) : (
+                <li
+                  key={city}
+                  className="odd:text-white even:bg-violet-50 odd:bg-violet-500 
+                 even:text-gray-700 px-3 py-2 rounded-xl even:mr-auto odd:ml-auto even:rounded-bl-none odd:rounded-br-none"
+                >
+                  {city}
+                </li>
+              )
+            )}
           </ul>
           <p className="text-sm text-gray-400 text-center">{`Всего перечислено городов: ${cities.length}`}</p>
         </>
