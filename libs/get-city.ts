@@ -336,10 +336,14 @@ export default async function getCity(value: string) {
     lastChar = value[value.length - 2];
   }
 
-  //Ищем город для ответа
-  const foundCity = data.find((city) =>
+  //Массив всех городов на нужную букву
+  const arrOfCities = data.filter((city) =>
     city.startsWith(lastChar.toUpperCase())
   );
+
+  //Ищем город для ответа
+  const randomIndex = Math.floor(Math.random() * arrOfCities.length);
+  const foundCity = arrOfCities[randomIndex];
 
   if (!foundCity) return null;
   //Находим индекс города
