@@ -138,35 +138,37 @@ export default function FirstCityPage() {
           <p className="text-sm text-gray-400 text-center">{`Всего перечислено городов: ${cities.length}`}</p>
         </>
       )}
-      <form
-        onSubmit={handleSubmit}
-        className=" bg-gray-100 py-2 px-3 rounded m-4"
-      >
+      <div className="m-4 mt-3">
         {error && <p className="text-sm text-red-500">{error}</p>}
-        <div className="flex items-center justify-between">
-          <input
-            type="text"
-            placeholder={
-              isYouTurn
-                ? isFirstSubmit
-                  ? "Напишите любой город, например: Где вы живете?"
-                  : `Знаете город на букву "${LastChar.toUpperCase()}" ?`
-                : "Ожидаем ответ соперника..."
-            }
-            className="placeholder:text-gray-700 bg-gray-100 w-full outline-none disabled:placeholder-shown:none pr-4"
-            onChange={(e) => changeValue(e.target.value)}
-            value={value}
-            disabled={!isYouTurn}
-          />
-          <button
-            type="submit"
-            className="bg-violet-600 text-white p-[6px] rounded disabled:bg-gray-400 hover:opacity-75 transition-all"
-            disabled={!isYouTurn || !value}
-          >
-            <Icon />
-          </button>
-        </div>
-      </form>
+        <form
+          onSubmit={handleSubmit}
+          className=" bg-gray-100 py-2 px-3 rounded mt-1"
+        >
+          <div className="flex items-center justify-between">
+            <input
+              type="text"
+              placeholder={
+                isYouTurn
+                  ? isFirstSubmit
+                    ? "Напишите любой город, например: Где вы живете?"
+                    : `Знаете город на букву "${LastChar.toUpperCase()}" ?`
+                  : "Ожидаем ответ соперника..."
+              }
+              className="placeholder:text-gray-700 bg-gray-100 w-full outline-none disabled:placeholder-shown:none pr-4"
+              onChange={(e) => changeValue(e.target.value)}
+              value={value}
+              disabled={!isYouTurn}
+            />
+            <button
+              type="submit"
+              className="bg-violet-600 text-white p-[6px] rounded disabled:bg-gray-400 hover:opacity-75 transition-all"
+              disabled={!isYouTurn || !value}
+            >
+              <Icon />
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 
